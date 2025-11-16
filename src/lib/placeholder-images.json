@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "residential",
+      "description": "A modern residential building with balconies.",
+      "imageUrl": "https://images.unsplash.com/photo-1621070659899-40b6b6f6731d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtb2Rlcm4lMjBhcGFydG1lbnR8ZW58MHx8fHwxNzYzMjkzMTE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern apartment"
+    },
+    {
+      "id": "commercial",
+      "description": "A sleek commercial office building.",
+      "imageUrl": "https://images.unsplash.com/photo-1550510537-64a36484eae2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8b2ZmaWNlJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzYzMjcwNzkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office building"
+    },
+    {
+      "id": "industrial",
+      "description": "An industrial factory with smokestacks.",
+      "imageUrl": "https://images.unsplash.com/photo-1716643863806-989dd76ae093?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmYWN0b3J5fGVufDB8fHx8MTc2MzMwNDM5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "factory"
+    },
+    {
+      "id": "park",
+      "description": "A lush green park with trees.",
+      "imageUrl": "https://images.unsplash.com/photo-1621661514271-48da9d48580f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjaXR5JTIwcGFya3xlbnwwfHx8fDE3NjMyMTM2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city park"
+    },
+    {
+      "id": "road",
+      "description": "A paved road.",
+      "imageUrl": "https://images.unsplash.com/photo-1619185960651-36df716d4dab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxhc3BoYWx0JTIwcm9hZHxlbnwwfHx8fDE3NjMzMDQzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "asphalt road"
+    }
+  ]
 }
