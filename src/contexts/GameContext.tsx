@@ -10,7 +10,7 @@ const GameContext = createContext<{ state: GameState; dispatch: React.Dispatch<G
 function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'LOAD_STATE':
-        return { ...action.payload, isLoading: false };
+        return { ...state, ...action.payload, isLoading: false };
     case 'SET_IS_LOADING':
         return { ...state, isLoading: action.payload };
 
@@ -249,7 +249,10 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (state.isLoading) return;
     const saveInterval = setInterval(() => {
       try {
-        localStorage.setItem(GAME_STATE_KEY, JSON.stringify(state));
+        const stateToSave = { ...state };
+        // Don't save wallet state to local storage
+        delete (stateToSave as Partial<GameState>).wallet;
+        localStorage.setItem(GAME_STATE_KEY, JSON.stringify(stateToSave));
       } catch (error) {
         console.error("Failed to save game state:", error);
       }

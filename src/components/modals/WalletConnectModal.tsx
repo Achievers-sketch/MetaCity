@@ -10,14 +10,18 @@ export default function WalletConnectModal() {
   const { address, isConnected } = useAccount();
 
   useEffect(() => {
+    // Safely access wallet state
+    const walletConnected = state.wallet?.connected;
+    const walletAddress = state.wallet?.address;
+
     if (isConnected && address) {
-      if (!state.wallet.connected || state.wallet.address !== address) {
+      if (!walletConnected || walletAddress !== address) {
         dispatch({ type: 'CONNECT_WALLET', payload: address });
       }
-    } else if (state.wallet.connected) {
+    } else if (walletConnected) {
       dispatch({ type: 'DISCONNECT_WALLET' });
     }
-  }, [isConnected, address, state.wallet.connected, state.wallet.address, dispatch]);
+  }, [isConnected, address, state.wallet, dispatch]);
 
   return <ConnectButton />;
 }
