@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export type BuildingType = 'residential' | 'commercial' | 'industrial' | 'park' | 'road';
 export type ResourceName = 'gold' | 'citizens' | 'happiness';
 
@@ -125,3 +127,20 @@ export type GameAction =
   | { type: 'TOGGLE_TUTORIAL'; payload: boolean }
   | { type: 'LOAD_STATE'; payload: GameState }
   | { type: 'SET_IS_LOADING'; payload: boolean };
+
+
+// AI Schema Types
+
+export const InGameNewsHeadlineInputSchema = z.object({
+  gold: z.number().describe('The current amount of gold tokens the player has.'),
+  citizens: z.number().describe('The current number of citizens in the city.'),
+  happiness: z.number().describe('The current happiness level of the city.'),
+});
+
+export type InGameNewsHeadlineInput = z.infer<typeof InGameNewsHeadlineInputSchema>;
+
+export const InGameNewsHeadlineOutputSchema = z.object({
+  headline: z.string().describe('A short, engaging news headline for a city-builder game, inspired by a real-world event.'),
+});
+
+export type InGameNewsHeadlineOutput = z.infer<typeof InGameNewsHeadlineOutputSchema>;

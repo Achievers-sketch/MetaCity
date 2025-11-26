@@ -9,6 +9,7 @@ import BottomBar from './BottomBar';
 import TutorialOverlay from '@/components/modals/TutorialOverlay';
 import GovernanceModal from '@/components/modals/GovernanceModal';
 import MarketplaceModal from '@/components/modals/MarketplaceModal';
+import NewsTicker from './NewsTicker';
 import { Landmark, ShoppingCart, HelpCircle } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
 
@@ -41,6 +42,7 @@ export default function GameLayout() {
       <div className="flex flex-1 overflow-hidden">
         <main className="flex-1 flex flex-col relative">
           <GameGrid />
+          <NewsTicker />
           <BottomBar />
           <div className="absolute top-4 left-4 flex gap-2">
             <Button onClick={() => setGovernanceOpen(true)}><Landmark className="mr-2 h-4 w-4" />Governance</Button>
