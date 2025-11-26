@@ -11,7 +11,7 @@ export default function WalletConnectModal() {
   const handleConnect = () => {
     // In a real app, this would trigger a wallet connection flow.
     // For this demo, we'll simulate a connection.
-    if (!wallet.connected) {
+    if (wallet && !wallet.connected) {
       dispatch({ type: 'CONNECT_WALLET', payload: '0xPlayer1...' });
     }
   };
@@ -21,7 +21,7 @@ export default function WalletConnectModal() {
     handleConnect();
   }, []);
 
-  if (wallet.connected && wallet.address) {
+  if (wallet?.connected && wallet?.address) {
     return (
       <div className="flex items-center gap-2">
         <div className="text-sm">
