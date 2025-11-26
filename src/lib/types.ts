@@ -109,7 +109,8 @@ export interface GameState {
 
 export type GameAction =
   | { type: 'TICK'; payload: { now: number } }
-  | { type: 'CONNECT_WALLET' }
+  | { type: 'CONNECT_WALLET', payload: string }
+  | { type: 'DISCONNECT_WALLET' }
   | { type: 'SET_BUILD_MODE'; payload: BuildingType | null }
   | { type: 'SELECT_TILE'; payload: Position | null }
   | { type: 'PLACE_BUILDING'; payload: { position: Position; type: BuildingType } }

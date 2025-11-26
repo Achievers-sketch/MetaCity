@@ -4,6 +4,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import type { GameState, GameAction, Building, MarketItem, Proposal, TileData } from '@/lib/types';
 import { INITIAL_GAME_STATE, GAME_STATE_KEY, AUTOSAVE_INTERVAL, TICK_RATE, PROPOSAL_DURATION } from '@/lib/constants';
 import { calculateResourceGains } from '@/lib/game-logic';
+import { useAccount } from 'wagmi';
 
 const GameContext = createContext<{ state: GameState; dispatch: React.Dispatch<GameAction> } | undefined>(undefined);
 
@@ -33,9 +34,11 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     }
     
     case 'CONNECT_WALLET':
-        if (state.wallet.connected) return state;
-        const address = `0x${Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join('')}`;
-        return { ...state, wallet: { connected: true, address } };
+      if (state.wallet.connected && state.wallet.address === action.payload) return state;
+      return { ...state, wallet: { connected: true, address: action.payload } };
+    
+    case 'DISCONNECT_WALLET':
+      return { ...state, wallet: { connected: false, address: null } };
 
     case 'SET_BUILD_MODE':
       return { ...state, buildMode: action.payload, selectedTile: null };
@@ -225,6 +228,15 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_GAME_STATE);
+  const { address, isConnected, isDisconnected } = useAccount();
+
+  useEffect(() => {
+    if (isConnected && address) {
+      dispatch({ type: 'CONNECT_WALLET', payload: address });
+    } else if (isDisconnected) {
+      dispatch({ type: 'DISCONNECT_WALLET' });
+    }
+  }, [address, isConnected, isDisconnected]);
 
   useEffect(() => {
     try {
