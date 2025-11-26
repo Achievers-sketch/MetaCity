@@ -19,7 +19,7 @@ export default function GovernanceModal({ isOpen, onClose }: GovernanceModalProp
     dispatch({ type: 'VOTE_ON_PROPOSAL', payload: { proposalId, vote } });
   };
   
-  const votingPower = state.nfts.filter(nft => (nft as any).owner === state.wallet.address).length || 1;
+  const votingPower = state.nfts.filter(nft => (nft as any).owner === state.wallet?.address).length || 1;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
