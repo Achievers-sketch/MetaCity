@@ -4,7 +4,6 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import type { GameState, GameAction, Building, MarketItem, Proposal, TileData } from '@/lib/types';
 import { INITIAL_GAME_STATE, GAME_STATE_KEY, AUTOSAVE_INTERVAL, TICK_RATE, PROPOSAL_DURATION } from '@/lib/constants';
 import { calculateResourceGains } from '@/lib/game-logic';
-import { useAccount } from 'wagmi';
 
 const GameContext = createContext<{ state: GameState; dispatch: React.Dispatch<GameAction> } | undefined>(undefined);
 
@@ -228,21 +227,14 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_GAME_STATE);
-  const { address, isConnected, isDisconnected } = useAccount();
-
-  useEffect(() => {
-    if (isConnected && address) {
-      dispatch({ type: 'CONNECT_WALLET', payload: address });
-    } else if (isDisconnected) {
-      dispatch({ type: 'DISCONNECT_WALLET' });
-    }
-  }, [address, isConnected, isDisconnected]);
 
   useEffect(() => {
     try {
       const savedStateJSON = localStorage.getItem(GAME_STATE_KEY);
       if (savedStateJSON) {
         const savedState = JSON.parse(savedStateJSON);
+        // Don't load wallet state from local storage, it should be managed by the wallet connector
+        delete savedState.wallet;
         dispatch({ type: 'LOAD_STATE', payload: savedState });
       } else {
         dispatch({ type: 'SET_IS_LOADING', payload: false });
